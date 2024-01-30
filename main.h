@@ -18,6 +18,8 @@ typedef struct conv_spec
 int (*spec_f(const char c))(va_list *arg);
 int print_int(va_list *arg);
 
+void *alloc_int(int n, int *count);
+
 int _printf(const char *format, ...);
 
 #endif /* MAIN_H */
