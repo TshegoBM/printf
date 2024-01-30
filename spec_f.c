@@ -12,6 +12,9 @@ int (*spec_f(const char m))(va_list *)
 	char c;
 	con_t sp[] = {
 		{'d', print_int},
+		{'c', print_c},
+		{'s', print_s},
+		{'p', print_p},
 		{0, NULL}
 	};
 	if (m == 'i') /* specifiers 'd' & 'i' are handled the same */
@@ -19,7 +22,7 @@ int (*spec_f(const char m))(va_list *)
 	else
 		c = m;
 
-	for (i = 0; i < 1; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if (c == sp[i].spec)
 			return (sp[i].f);
