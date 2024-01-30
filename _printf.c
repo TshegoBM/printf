@@ -1,15 +1,15 @@
 #include "main.h"
 /**
   * _printf - format printing
-  * @format: 	character string composed of zero or more directives
-  		with conversion specification that starts with '%'
-		ending with conversion specifier
+  * @format: character string composed of zero or more directives
+  *          with conversion specification that starts with '%'
+  *          ending with conversion specifier
   * Return: number of characters printed excluding '\0'
   */
 int _printf(const char *format, ...)
 {
 	int n = 0, count = 0;
-	va_list args; 
+	va_list args;
 
 	va_start(args, format);
 	while (format[n] != '\0')
