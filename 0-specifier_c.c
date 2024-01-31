@@ -13,5 +13,4 @@ int print_c(va_list *args)
 	character = va_arg(*args, int);
 
 	return (write(1, &character, 1));
-
 }

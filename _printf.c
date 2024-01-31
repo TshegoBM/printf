@@ -11,6 +11,12 @@ int _printf(const char *format, ...)
 	int n = 0, count = 0;
 	va_list args;
 
+	if (format == NULL)
+	{
+		errno = 22;
+		perror("Error");
+		exit(EXIT_FAILURE);
+	}
 	va_start(args, format);
 	while (format[n] != '\0')
 	{
@@ -18,9 +24,9 @@ int _printf(const char *format, ...)
 		{
 			if (spec_f(format[n + 1]) == NULL)
 			{ /* no specifier after '%' continue normally */
-				write(1, (format + n), 1);
-				count++;
-				n++;
+				errno = 22;
+				perror("Error");
+				exit(EXIT_FAILURE);
 			}
 			else
 			{ /* call function to specifier */

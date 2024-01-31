@@ -10,7 +10,7 @@ int print_int(va_list *arg)
 	int a = 1000000000, m = 0, count = 10, x = 0, n = 0;
 	char *c;
 
-	value_errcheck(arg, &n);
+	value_errcheck(arg, &n, 'i');
 	c = alloc_int(n, &count);
 	if (c == NULL)
 		exit(EXIT_FAILURE);
