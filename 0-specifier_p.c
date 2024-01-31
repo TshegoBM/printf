@@ -6,7 +6,7 @@
  * Return: Always returns 1.
  */
 
-int print_p(va_list *args __attribute__((unused)))
+int print_p(va_list * args __attribute__((unused)))
 {
 	char percent;
 

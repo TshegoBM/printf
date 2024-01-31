@@ -5,20 +5,38 @@
   * @n: pointer to value
   * Return: (0) success
   */
-int value_errcheck(va_list *arg, int *n)
+int value_errcheck(va_list *arg, int *n, char c)
 {
 	long i;
-
-	i = va_arg(*arg, double);
-	if (i == 0)
-	{
-		i = va_arg(*arg, int);
-		if (i > INT_MAX || i < INT_MIN)
-		{
-			errno = 22;
-			perror("Error");
-			exit(EXIT_FAILURE);
-		}
+	switch (c) {
+		case 'i':
+			{
+			i = va_arg(*arg, double);
+			if (i == 0)
+			{
+				i = va_arg(*arg, int);
+				if (i > INT_MAX || i < INT_MIN)
+				{
+					errno = 22;
+					perror("Error");
+					exit(EXIT_FAILURE);
+				}
+			}
+			break;
+			}
+		case 'b':
+			{
+			i = va_arg(*arg, long);
+			if (i > UINT_MAX || i < 0)
+			{
+				errno = 22;
+				perror("Error");
+				exit(EXIT_FAILURE);
+			}
+			break;
+			}
+		default:
+			break;
 	}
 	*n = i;
 	return (0);
