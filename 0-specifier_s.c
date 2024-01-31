@@ -13,12 +13,6 @@ int print_s(va_list *args)
 	int i;
 
 	str = va_arg(*args, char *);
-	if (!str) /* invalid string */
-	{
-		errno = 22;
-		perror("Error");
-		exit(EXIT_FAILURE);
-	}
 
 	if (str == NULL)
 	{

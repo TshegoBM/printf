@@ -3,40 +3,42 @@
   * value_errcheck - ensure argument is valid
   * @arg: pointer argument
   * @n: pointer to value
+  * @c: specifier
   * Return: (0) success
   */
 int value_errcheck(va_list *arg, int *n, char c)
 {
 	long i;
-	switch (c) {
-		case 'i':
-			{
-			i = va_arg(*arg, double);
-			if (i == 0)
-			{
-				i = va_arg(*arg, int);
-				if (i > INT_MAX || i < INT_MIN)
-				{
-					errno = 22;
-					perror("Error");
-					exit(EXIT_FAILURE);
-				}
-			}
-			break;
-			}
-		case 'b':
-			{
-			i = va_arg(*arg, long);
-			if (i > UINT_MAX || i < 0)
+
+	switch (c)
+	{
+	case 'i':
+		i = va_arg(*arg, double);
+		if (i == 0)
+		{
+			i = va_arg(*arg, int);
+			if (i > INT_MAX || i < INT_MIN)
 			{
 				errno = 22;
 				perror("Error");
 				exit(EXIT_FAILURE);
 			}
-			break;
-			}
-		default:
-			break;
+		}
+		break;
+		}
+	case 'b':
+		{
+		i = va_arg(*arg, long);
+		if (i > UINT_MAX || i < 0)
+		{
+			errno = 22;
+			perror("Error");
+			exit(EXIT_FAILURE);
+		}
+		break;
+		}
+	default:
+		break;
 	}
 	*n = i;
 	return (0);
@@ -51,7 +53,7 @@ int value_errcheck(va_list *arg, int *n, char c)
  */
 void *alloc_int(int n, int *count)
 {
-	int a = 1000000000;
+	int m = 1000000000;
 
 	if (n < 0)
 	{
@@ -60,10 +62,10 @@ void *alloc_int(int n, int *count)
 			n++;
 		n *= -1;
 	}
-	while (n < a && a >= 1)
+	while (n < m && a >= 1)
 	{
 		count[0]--;
-		a /= 10;
+		m /= 10;
 	}
 	if (n == 0)
 		*count = 1;
