@@ -9,7 +9,6 @@
 int print_s(va_list *args)
 {
 	char *str;
-	int i;
 	int count = 0;
 
 	str = va_arg(*args, char *);
@@ -20,11 +19,10 @@ int print_s(va_list *args)
 		exit(EXIT_FAILURE);
 	}
 
-	for (i = 0; str[i] != '\0'; i++)
+	while (*str)
 	{
-		write(1, &str[i], 1);
-		count++;
+		count += write(1, str, 1);
+		str++;
 	}
-
 	return (count);
 }
