@@ -20,7 +20,7 @@ int print_s(va_list *args)
 		return (6);
 	}
 
-	for (int i = 0; str[i] != '\0'; i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
 		write(1, &str[i], 1);
 		count++;
