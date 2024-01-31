@@ -10,13 +10,21 @@ int print_s(va_list *args)
 {
 	char *str;
 	int count = 0;
+	int i;
 
 	str = va_arg(*args, char *);
 
-	while (*str)
+	if (str == NULL)
 	{
-		count += write(1, str, 1);
-		str++;
+		write(1, "null)", 6);
+		return (6);
 	}
+
+	for (int i = 0; str[i] != '\0'; i++)
+	{
+		write(1, &str[i], 1);
+		count++;
+	}
+
 	return (count);
 }
