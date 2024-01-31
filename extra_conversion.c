@@ -7,19 +7,18 @@
   */
 int value_errcheck(va_list *arg, int *n)
 {
-	int i;
+	long i;
 
 	i = va_arg(*arg, double);
 	if (i == 0)
 	{
-		if (va_arg(*arg, long) > INT_MAX || va_arg(*arg, long) < INT_MIN)
+		i = va_arg(*arg, int);
+		if (i > INT_MAX || i < INT_MIN)
 		{
 			errno = 22;
 			perror("Error");
 			exit(EXIT_FAILURE);
 		}
-		else
-			i = va_arg(*arg, int);
 	}
 	*n = i;
 	return (0);
