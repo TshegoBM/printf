@@ -21,9 +21,10 @@ typedef struct conv_spec
 
 int (*spec_f(const char c))(va_list *);
 int print_int(va_list *);
+int print_uint(va_list *arg);
 
 void *alloc_int(int n, int *count);
-int value_errcheck(va_list *arg, int *n, char c);
+void *alloc_uint(long n, int *count);
 
 int _printf(const char *format, ...);
 int _putchar(char);
