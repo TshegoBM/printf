@@ -34,5 +34,6 @@ int _printf(const char *format, ...)
 		n++;
 
 	}
+	va_end(args);
 	return (count);
 }

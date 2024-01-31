@@ -7,15 +7,13 @@
   */
 int print_int(va_list *arg)
 {
-	int n, a = 1000000000, m = 0;
-	int count = 10, x = 0;
+	int a = 1000000000, m = 0, count = 10, x = 0, n;
 	char *c;
 
-	n = va_arg(*arg, int);
+	value_errcheck(arg, &n);
 	c = alloc_int(n, &count);
 	if (c == NULL)
 		exit(EXIT_FAILURE);
-
 	if (n < 0)
 	{
 		c[m] = '-';
@@ -44,34 +42,4 @@ int print_int(va_list *arg)
 	write(1, c, count);
 	free(c);
 	return (count);
-}
-
-/**
-  * alloc_int - allocate memory for integer string
-  * @n: integer to allocate memory for
-  * @count: pointer to maximum number of possible positive characters
-  * Return: pointer to allocated memory. (success)
-  *         NULL, malloc fails
-  */
-void *alloc_int(int n, int *count)
-{
-	int a = 1000000000;
-
-	if (n < 0)
-	{
-		count[0]++;
-		if (n % 10 == -8)
-		{
-			n++;
-			n *= -1;
-		}
-	}
-	while (n < a && a >= 1)
-	{
-		count[0]--;
-		a /= 10;
-	}
-	if (n == 0)
-		*count = 1;
-	return (malloc(*count));
 }
