@@ -26,5 +26,9 @@ void *alloc_int(int n, int *count);
 int value_errcheck(va_list *arg, int *n);
 
 int _printf(const char *format, ...);
+int _putchar(char);
+int print_c(va_list *arg);
+int print_s(va_list *arg);
+int print_p(va_list *arg);
 
 #endif /* MAIN_H */
