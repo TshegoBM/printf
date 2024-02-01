@@ -17,6 +17,9 @@ int (*spec_f(const char m))(va_list *)
 		{'%', print_p},
 		{'u', print_uint},
 		{'b', print_b},
+		{'o', print_octal},
+		{'x', print_lowerhex},
+		{'X', print_upperhex},
 		{0, NULL}
 	};
 	if (m == 'i') /* specifiers 'd' & 'i' are handled the same */
@@ -24,7 +27,7 @@ int (*spec_f(const char m))(va_list *)
 	else
 		c = m;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 9; i++)
 	{
 		if (c == sp[i].spec)
 			return (sp[i].f);

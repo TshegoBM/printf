@@ -27,25 +27,21 @@ void *alloc_int(int n, int *count)
 	return (malloc(*count));
 }
 
-/*void *alloc_binary(int n, int *count)*/
-/*	while (!(n / 2 == 0 && n % 2 == 1))*/
-/*		n /= 2;*/
-/*		count[0]++;*/
-
 /**
-  * alloc_uint - allocate memory for given unsigned int
+  * alloc_base - allocate memory for converted unsigned int from base ten
+  * @base: base required to converted to i.e. 8 for octal
   * @n: unsigned int value
-  * @count: number of maximum characters
+  * @count: number to contain number of bytes (should be initialised to 0)
   * Return: pointer to allocated memory
   */
-void *alloc_uint(long n, int *count)
+void *alloc_base(long n, int *count, int base)
 {
-	long m = 1000000000;
+	long m = n;
 
-	while (n < m && m >= 1)
+	while (m / base != 0 || m % base != 0)
 	{
-		count[0]--;
-		m /= 10;
+		*count += 1;
+		m /= base;
 	}
 	if (n == 0)
 		*count = 1;
