@@ -29,7 +29,7 @@ int print_b(va_list *arg)
 		length++;
 	}
 
-	while (decimal != 0)
+	while (decimal != 0);
 		binary[length] = '\0';
 		middle = length / 2;
 
