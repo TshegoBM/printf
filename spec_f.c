@@ -16,6 +16,7 @@ int (*spec_f(const char m))(va_list *)
 		{'s', print_s},
 		{'%', print_p},
 		{'u', print_uint},
+		{'b', print_b},
 		{0, NULL}
 	};
 	if (m == 'i') /* specifiers 'd' & 'i' are handled the same */
