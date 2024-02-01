@@ -12,10 +12,10 @@
 int print_b(va_list *arg)
 {
 	unsigned int decimal = va_arg(*arg, unsigned int);
-	char binary[34];
+	char binary[32];
 	int length = 0;
 	int middle;
-	int count;
+	int count = 0;
 	char temp;
 	int i;
 
@@ -41,7 +41,7 @@ int print_b(va_list *arg)
 		binary[length - i - 1] = temp;
 	}
 
-	count = 0;
+
 	for (i = 0; binary[i] != '\0'; i++)
 	{
 		write(1, &binary[i], 1);
