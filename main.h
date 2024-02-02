@@ -25,6 +25,7 @@ int print_uint(va_list *arg);
 int print_octal(va_list *arg);
 int print_upperhex(va_list *arg);
 int print_lowerhex(va_list *arg);
+int print_s_con(va_list *arg);
 
 void *alloc_base(long n, int *count, int base);
 void *alloc_int(int n, int *count);

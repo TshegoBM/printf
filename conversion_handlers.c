@@ -165,3 +165,47 @@ int print_upperhex(va_list *arg)
 	free(str);
 	return (count);
 }
+
+/**
+  * print_s_ - print string with unprintable characters replaced with \x
+  * @arg: pointer to string
+  * Return: number of characters
+  */
+int print_s_con(va_list *arg)
+{
+	char *str, *scopy, hex[] = {"0123456789ABCDEF"};
+	int index, new, count = 0;
+
+	str = va_arg(*arg, char *);
+	for (index = 0; str[index] != '\0'; index++)
+	{
+		if ((str[index] > 0 && str[index] < 32) || str[index] >= 127)
+		{
+			count += 3;
+		}
+		count++;
+	}
+	scopy = malloc(count);
+	if (!scopy)
+		return(0);
+	index = 0;
+	for (new = 0; new < count; new++)
+	{
+		if ((str[index] > 0 && str[index] < 32) || str[index] >= 127)
+		{
+			scopy[new++] = '\\';
+			scopy[new++] = 'x';
+			scopy[new++] = hex[str[index] / 16];
+			scopy[new] = hex[str[index] % 16];
+			index++;
+		}
+		else
+		{
+			scopy[new] = str[index];
+			index++;
+		}
+	}
+	write(1, scopy, count);
+	free(scopy);
+	return (count);
+}
