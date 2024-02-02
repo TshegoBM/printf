@@ -46,13 +46,6 @@ int print_int(va_list *arg)
 	return (count);
 }
 
-
-/* print_binary - convert unsigned int to binary*/
-/* int print_binary(va_list *arg)*/
-/* int n = 0, count = 0;*/
-/* char *binary;*/
-/* value_errcheck(arg, &n, 'b');*/
-
 /**
  * print_uint - print unsigned integer given by arg to stdout
  * @arg: pointer to current va_list argument
@@ -60,26 +53,159 @@ int print_int(va_list *arg)
  */
 int print_uint(va_list *arg)
 {
-	int a = 1000000000, m = 0, count = 10;
-	long n;
-	char *c;
+	int m, count = 0;
+	long unint, uncopy;
+	char *str, dec[] = {"0123456789"};
 
-	n = va_arg(*arg, long);
-	c = alloc_uint(n, &count);
-	if (c == NULL)
+	unint = uncopy = va_arg(*arg, long);
+
+	str = alloc_base(unint, &count, 10);
+	if (!str)
 		exit(EXIT_FAILURE);
-	while (a >= 1)
+
+	m = count - 1;
+	while (m >= 0)
 	{
-		if (n >= a)
-		{
-			c[m] = '0' + ((n / a) % 10);
-			m++;
-		}
-		a /= 10;
+		str[m] = dec[uncopy % 10];
+		uncopy /= 10;
+		m--;
 	}
-	if (n == 0)
-		c[m] = '0';
-	write(1, c, count);
-	free(c);
+
+	write(1, str, count);
+	free(str);
+	return (count);
+}
+
+/**
+  * print_octal - convert and print unsigned int from base 10 to octal
+  * @arg: pointer to given unsigned integer
+  * Return: number of characters printed
+  */
+int print_octal(va_list *arg)
+{
+	int index, count = 0;
+	long unint, temp;
+	char *str, dec[] = {"01234567"};
+
+	unint = temp = va_arg(*arg, long);
+
+	str = alloc_base(unint, &count, 8);
+	if (!str)
+		exit(EXIT_FAILURE);
+
+	index = count - 1;
+	while (index >= 0)
+	{
+		str[index] = dec[temp % 8];
+		temp /= 8;
+		index--;
+	}
+
+	write(1, str, count);
+	free(str);
+	return (count);
+}
+
+/**
+  * print_lowerhex - convert and print unsigned int from decimal to hexadecimal
+  * @arg: pointer to given unsigned integer
+  * Return: number of characters printed
+  */
+int print_lowerhex(va_list *arg)
+{
+	int index, count = 0;
+	long unint, temp;
+	char *str, dec[] = {"0123456789abcdef"};
+
+	unint = temp = va_arg(*arg, long);
+
+	str = alloc_base(unint, &count, 16);
+	if (!str)
+		exit(EXIT_FAILURE);
+
+	index = count - 1;
+	while (index >= 0)
+	{
+		str[index] = dec[temp % 16];
+		temp /= 16;
+		index--;
+	}
+
+	write(1, str, count);
+	free(str);
+	return (count);
+}
+
+/**
+  * print_upperhex - convert and print unsigned int from decimal to hexadecimal
+  * @arg: pointer to given unsigned integer
+  * Return: number of characters printed
+  */
+int print_upperhex(va_list *arg)
+{
+	int index, count = 0;
+	long unint, temp;
+	char *str, dec[] = {"0123456789ABCDEF"};
+
+	unint = temp = va_arg(*arg, long);
+
+	str = alloc_base(unint, &count, 16);
+	if (!str)
+		exit(EXIT_FAILURE);
+
+	index = count - 1;
+	while (index >= 0)
+	{
+		str[index] = dec[temp % 16];
+		temp /= 16;
+		index--;
+	}
+
+	write(1, str, count);
+	free(str);
+	return (count);
+}
+
+/**
+  * print_s_ - print string with unprintable characters replaced with \x
+  * @arg: pointer to string
+  * Return: number of characters
+  */
+int print_s_con(va_list *arg)
+{
+	char *str, *scopy, hex[] = {"0123456789ABCDEF"};
+	int index, new, count = 0;
+
+	str = va_arg(*arg, char *);
+	for (index = 0; str[index] != '\0'; index++)
+	{
+		if ((str[index] > 0 && str[index] < 32) || str[index] >= 127)
+		{
+			count += 3;
+		}
+		count++;
+	}
+	scopy = malloc(count);
+	if (!scopy)
+		return(0);
+	index = 0;
+	for (new = 0; new < count; new++)
+	{
+		if ((str[index] > 0 && str[index] < 32) || str[index] >= 127)
+		{
+			scopy[new++] = '\\';
+			scopy[new++] = 'x';
+			scopy[new++] = hex[str[index] / 16];
+			scopy[new] = hex[str[index] % 16];
+			index++;
+		}
+		else
+		{
+			scopy[new] = str[index];
+			index++;
+		}
+	}
+	write(1, scopy, count);
+	free(scopy);
 	return (count);
 }
