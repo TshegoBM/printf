@@ -12,22 +12,27 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
+	{
+		if (format == NULL)
+		{
+			va_end(args);
+			return (-1);
+		}
+	}
 	while (format[n] != '\0')
 	{
 		if (format[n] == '%')
 		{
-			if (spec_f(format[n + 1]) == NULL)
-			{ /* no specifier after '%' continue normally */
-				write(1, (format + n), 1);
+			if (format[n + 1] == '\0' || spec_f(format[n + 1]) == NULL)
+			{
+				write(1, "%", 1);
 				count++;
 				n++;
+				continue;
 			}
-			else
-			{ /* call function to specifier */
 				count += (*spec_f(format[n + 1]))(&args);
 				n += 2; /* skip to character after specifier */
-			}
-			continue;
+				continue;
 		}
 		write(1, (format + n), 1);
 		count++;
