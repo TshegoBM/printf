@@ -32,5 +32,7 @@ int print_c(va_list *arg);
 int print_s(va_list *arg);
 int print_p(va_list *arg);
 int print_b(va_list *arg);
+int print_pointer(va_list *arg);
+void write_buffer(const char *buffer, size_t size);
 
 #endif /* MAIN_H */
