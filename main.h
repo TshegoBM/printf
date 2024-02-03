@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <errno.h>
+#define BUFFER_SIZE 1024
 extern int errno;
 /**
   * struct conv_spec - structure to store the function for each specifier
