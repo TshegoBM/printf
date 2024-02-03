@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdarg.h>
+#include <string.h>
 /**
  * print_pointer - Pront pointers based on the provided format.
  * @args: A pointer to a va_list of arguments.
@@ -14,6 +15,8 @@ int print_pointer(va_list *arg)
 	va_list args_duplicate;
 	va_copy(args_duplicate, *arg);
 
+	char buffer[20];
+
 	while (*format != '\0')
 	{
 		if (*format == '%' && *(format + 1) == 'p')
@@ -21,7 +24,6 @@ int print_pointer(va_list *arg)
 			void *ptr = va_arg(args_duplicate, void*);
 			write(1, "0x", 2);
 
-			char buffer[20];
 			sprintf(buffer, "%p", ptr);
 			write(1, buffer, strlen(buffer));
 
@@ -30,8 +32,12 @@ int print_pointer(va_list *arg)
 	else
 	{
 		char buffer[2] = {*format, '\0'};
+		buffer[0] = *format;
+		buffer[1] = '\0';
+
 		write(1, buffer, 1);
 		format++;
+
 	}
 	}
 	va_end(args_duplicate);

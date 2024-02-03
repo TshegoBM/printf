@@ -12,7 +12,7 @@
  * Return: Number of characters printed (string length).
  */
 
-void write_buffer(const char *buffer, size_t size);
+void write_buffer(const char *buffer, size_t size)
 {
 	write(1, buffer, size);
 }
