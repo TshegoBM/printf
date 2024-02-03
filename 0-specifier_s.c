@@ -6,7 +6,7 @@
  * Return: Number of characters printed (string length).
  */
 
-inr print_s(va_list *args)
+int print_s(va_list *args)
 {
 	char *str;
 	int count = 0;
@@ -20,10 +20,10 @@ inr print_s(va_list *args)
 		return(6);
 	}
 
-	for (i = 0; str[i] != '\0\; i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
 		write(1, &str[i], 1);
 		count++;
 	}
-	return(count;
+	return(count);
 }
