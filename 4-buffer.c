@@ -4,6 +4,8 @@
 
 #define BUFFER_SIZE 1024
 
+void write_buffer(const char *buffer, size_t size);
+
 int print_s(va_list *args) 
 {
 	char *str = va_arg(*args, char *);
