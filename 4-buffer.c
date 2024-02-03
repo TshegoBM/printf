@@ -17,7 +17,7 @@ void write_buffer(const char *buffer, size_t size)
 	write(1, buffer, size);
 }
 
-int print_s(va_list *args)
+	int print_s(va_list *args)
 {
 	char *str = va_arg(*args, char *);
 

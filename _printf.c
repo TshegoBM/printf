@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 		{
 			if (spec_f(format[n + 1]) == NULL)
 			{
-				write(1(format + n), 1);
+				write(1, (format + n), 1);
 				count++;
 				n++;
 			}
