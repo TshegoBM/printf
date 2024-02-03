@@ -4,9 +4,20 @@
 
 #define BUFFER_SIZE 1024
 
-void write_buffer(const char *buffer, size_t size);
+/**
+ * print_s - Print a string.
+ * @buffer: The butter containing the content to be written.
+ * @size: The size of the content to be written.
+ *
+ * Return: Number of characters printed (string length).
+ */
 
-int print_s(va_list *args) 
+void write_buffer(const char *buffer, size_t size);
+{
+	write(1, buffer, size);
+}
+
+int print_s(va_list *args)
 {
 	char *str = va_arg(*args, char *);
 
