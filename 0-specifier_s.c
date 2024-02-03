@@ -14,10 +14,10 @@ int print_s(va_list *args)
 
 	str = va_arg(*args, char*);
 
-	if(str == NULL)
+	if (str == NULL)
 	{
 		write(1, "(null)", 6);
-		return(6);
+		return (6);
 	}
 
 	for (i = 0; str[i] != '\0'; i++)
@@ -25,5 +25,5 @@ int print_s(va_list *args)
 		write(1, &str[i], 1);
 		count++;
 	}
-	return(count);
+	return (count);
 }
